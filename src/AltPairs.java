@@ -14,5 +14,6 @@ public class AltPairs {
             finalString += str.charAt(i);
         }
         System.out.println(finalString);
+        System.out.println("New text");
     }
 }
