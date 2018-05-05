@@ -15,5 +15,6 @@ public class AltPairs {
         }
         System.out.println(finalString);
         System.out.println("New text");
+        System.out.println("New text form IDEA");
     }
 }

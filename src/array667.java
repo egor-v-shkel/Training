@@ -11,5 +11,6 @@ public class array667 {
             }*/
         }
         System.out.print(count);
+        System.out.println("New text form IDEA");
     }
 }
