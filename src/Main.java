@@ -1,7 +1,8 @@
-import String3.GHappy;
+import String3.MaxBlock;
+import String3.MirrorEnds;
 
 public class Main {
     public static void main(String args[]) {
-        GHappy.method("xxgxx");
+        System.out.println(MaxBlock.maxBlock("XXBBBbbxxXXXX"));;
     }
 }
