@@ -41,7 +41,7 @@ public class Mixing {
         int[] letterContainS1 = new int[26];
         int[] letterContainS2 = new int[26];
 
-        //fill alphabet with char
+        //fill alphabet with chars
         for (int i = 0; i < 26; i++) {
             alphabet[i] = (char) ('a'+i);
         }
@@ -56,13 +56,22 @@ public class Mixing {
             }
         }
 
-        String pattern1 = "/1:";
-        String pattern2 = "/2:";
-        String patternEqual = "/=:";
-        String finalString = "";
+        String pattern1 = "1:";
+        String pattern2 = "2:";
+        String patternEqual = "=:";
 
+        StringBuilder sb = new StringBuilder("");
 
+        for (int i = 0; i < 26; i++) {
+            if (Math.max(letterContainS1[i], letterContainS2[i]) <= 1) continue;
+            if (letterContainS1[i] > letterContainS2[i]) sb.append(pattern1);
+            if (letterContainS1[i] < letterContainS2[i]) sb.append(pattern2);
+            else sb.append(patternEqual);
+            sb.append(alphabet[i]);
+            if (i == 25) break;
+            sb.append('/');
+        }
 
-        return Arrays.toString(letterContainS2);
+        return sb.toString();
     }
 }
