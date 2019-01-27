@@ -32,12 +32,28 @@
 
 package CodeWars;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 
 public class Mixing {
 
     public static String mix(String s1, String s2) {
-        char[] alphabet = new char[26];
+
+        //edge case
+        if (s1 == s2) return "";
+
+        String srtS1 = getString(s1);
+        String srtS2 = getString(s2);
+        System.out.println("S1 string:"+srtS1);
+        System.out.println("S2 string:"+srtS2);
+        
+        int a = 'z';
+        System.out.println(a);
+
+        return "";
+
+        /*int[] alphabet = new char[26];
         int[] letterContainS1 = new int[26];
         int[] letterContainS2 = new int[26];
 
@@ -72,6 +88,20 @@ public class Mixing {
             sb.append('/');
         }
 
-        return sb.toString();
+        return sb.toString();*/
+    }
+
+    @NotNull
+    private static String getString(String str) {
+        char[] chars = str.toCharArray();
+
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] >= 'a' || chars[i] <= 'z') chars[i] = null;
+        }
+        
+        Arrays.sort(chars);
+        String sortedStr = new String(chars);
+        System.out.println(sortedStr);
+        return sortedStr;
     }
 }
