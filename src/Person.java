@@ -53,8 +53,5 @@ class PersonComparator implements Comparator<Person> {
             }
         }
         return value1;
-
-        /*int nameComp = emp1.getLastName().compareTo(emp2.getLastName());
-        return ((nameComp == 0) ? emp1.getFirstName().compareTo(emp2.getFirstName()) : nameComp);*/
     }
 }
