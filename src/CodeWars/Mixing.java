@@ -96,7 +96,7 @@ public class Mixing {
         char[] chars = str.toCharArray();
 
         for (int i = 0; i < chars.length; i++) {
-            if (chars[i] >= 'a' || chars[i] <= 'z') chars[i] = null;
+            if (chars[i] >= 'a' || chars[i] <= 'z');
         }
         
         Arrays.sort(chars);
