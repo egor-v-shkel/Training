@@ -1,4 +1,4 @@
-package String3;
+package CodingBat.String3;
 
 public class MaxBlock {
     public static int maxBlock(String str){

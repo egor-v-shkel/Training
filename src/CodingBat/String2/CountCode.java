@@ -1,4 +1,4 @@
-/*package String2;
+/*package CodingBat.String2;
 
 public class CountCode {
     public static void main(String args[]) {

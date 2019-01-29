@@ -1,4 +1,4 @@
-package String3;
+package CodingBat.String3;
 
 public class SumNumbers {
     public static int sumNumbers(String str){

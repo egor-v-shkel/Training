@@ -1,4 +1,4 @@
-package String3;
+package CodingBat.String3;
 
 public class GHappy {
     public static void method(String str){
