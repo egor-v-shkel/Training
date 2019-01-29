@@ -1,5 +1,9 @@
 package Schildt.LambdaExpressions;
 
+interface StringFunc {
+    String func(String str);
+}
+
 class LambdaArgumentDemo {
 
     // This method has a functional interface as the type of its
