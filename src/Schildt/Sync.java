@@ -4,9 +4,9 @@ class SummArray{
     private int sum;
     /*synchronized*/ int summArr(int[] arr){
         sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i];
-            System.out.println("Current summ for "+Thread.currentThread().getName()+" is - "+sum);
+        for (int i1 : arr) {
+            sum += i1;
+            System.out.println("Current summ for " + Thread.currentThread().getName() + " is - " + sum);
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
@@ -20,7 +20,7 @@ class SummArray{
 
 class MyThread implements Runnable {
     Thread thrd;
-    static SummArray sa = new SummArray();
+    static final SummArray sa = new SummArray();
     int[] a;
     int answer;
 
@@ -44,7 +44,7 @@ class MyThread implements Runnable {
 class Sync {
     public static void main(String[] args){
         int[] a = {1, 2, 3, 4, 5};
-        MyThread mt1 = new MyThread("Thread #1", a);
-        MyThread mt2 = new MyThread("Thread #2", a);
+        MyThread1 mt1 = new MyThread1("Thread #1");
+        MyThread1 mt2 = new MyThread1("Thread #2");
     }
 }

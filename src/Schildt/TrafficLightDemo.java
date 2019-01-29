@@ -1,7 +1,7 @@
-package Shildt;
+package Schildt;
 
 public class TrafficLightDemo {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         TrafficLightSimulator t1 = new TrafficLightSimulator(TrafficLightColor.GREEN);
         for (int i = 0; i < 9; i++) {
             System.out.println(t1.getColor());
@@ -17,10 +17,10 @@ enum TrafficLightColor{
 }
 
 class TrafficLightSimulator implements Runnable{
-    Thread thrd;
-    TrafficLightColor tlc;
-    boolean stop = false;
-    boolean changed = false;
+    private Thread thrd;
+    private TrafficLightColor tlc;
+    private boolean stop = false;
+    private boolean changed = false;
 
     TrafficLightSimulator(TrafficLightColor init) {
         tlc = init;

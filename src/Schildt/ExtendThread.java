@@ -1,11 +1,11 @@
-package Shildt;
+package Schildt;
 
 public class ExtendThread {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         System.out.println("Run main thread");
-        MyThread mt1 = new MyThread("Child #1");
-        MyThread mt2 = new MyThread("Child #2");
-        MyThread mt3 = new MyThread("Child #3");
+        MyThread1 mt1 = new MyThread1("Child #1");
+        MyThread1 mt2 = new MyThread1("Child #2");
+        MyThread1 mt3 = new MyThread1("Child #3");
         do {
             System.out.println(".");
             try {
@@ -18,8 +18,8 @@ public class ExtendThread {
     }
 }
 
-class MyThread extends Thread{
-    MyThread(String name){
+class MyThread1 extends Thread{
+    MyThread1(String name){
         super(name);
         start();
     }
