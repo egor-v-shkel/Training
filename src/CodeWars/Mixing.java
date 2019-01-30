@@ -32,8 +32,6 @@
 
 package CodeWars;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Arrays;
 
 public class Mixing {
@@ -91,7 +89,6 @@ public class Mixing {
         return sb.toString();*/
     }
 
-    @NotNull
     private static String getString(String str) {
         char[] chars = str.toCharArray();
 
