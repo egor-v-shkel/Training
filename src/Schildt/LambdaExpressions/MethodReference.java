@@ -11,6 +11,10 @@ class RefDemo{
 
     private String str;
 
+    RefDemo(){
+        this.str = "Default string";
+    }
+
     RefDemo(String str){
         this.str = str;
     }
@@ -23,7 +27,7 @@ class RefDemo{
         return str.contains(half);
     }
 
-    boolean haveEightChars(){
+    boolean haveEightChars(String str){
         return str.length() == 8;
     }
 }
@@ -33,9 +37,10 @@ class MethodReference {
 
         boolean part;
 
+        RefDemo eightTest = new RefDemo();
+        System.out.println(eightTest.getStr());
         RefDemo rDemo1 = new RefDemo("Строка String");
         RefDemo rDemo2 = new RefDemo("Здесь нет стринг");
-        RefDemo eightTest = new RefDemo("");
 
         LambdaI lambDem = rDemo1::isPartOf;
         part = lambDem.func("String");
@@ -46,11 +51,9 @@ class MethodReference {
         part = lambDem.func("12345678");
         System.out.println(part);
 
-/*
         lambDem = eightTest::haveEightChars;
         part = lambDem.func("12345678");
-        System.out.println("Has 8 chars "+part);
-*/
+        System.out.println("Common string has 8 chars "+part);
 
     }
 }
