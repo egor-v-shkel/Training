@@ -46,9 +46,11 @@ class MethodReference {
         part = lambDem.func("12345678");
         System.out.println(part);
 
+/*
         lambDem = eightTest::haveEightChars;
         part = lambDem.func("12345678");
         System.out.println("Has 8 chars "+part);
+*/
 
     }
 }
