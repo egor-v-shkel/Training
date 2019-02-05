@@ -29,7 +29,7 @@ class RefDemo{
 }
 
 class MethodReference {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         boolean part;
 
