@@ -1,10 +1,7 @@
-import CodeWars.Mixing;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-import static CodeWars.Mixing.mix;
 
 public class Main {
     public static void main(String args[]) {

@@ -12,7 +12,7 @@ class RefDemo{
     private String str;
 
     RefDemo(){
-        this.str = "Default string";
+        str = "Default string";
     }
 
     RefDemo(String str){

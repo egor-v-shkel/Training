@@ -1,104 +1,115 @@
-/*Given two strings s1 and s2, we want to visualize how different the two strings are. We will only take into account the lowercase letters (a to z). First let us count the frequency of each lowercase letters in s1 and s2.
-
-        s1 = "A aaaa bb c"
-
-        s2 = "& aaa bbb c d"
-
-        s1 has 4 'a', 2 'b', 1 'c'
-
-        s2 has 3 'a', 3 'b', 1 'c', 1 'd'
-
-        So the maximum for 'a' in s1 and s2 is 4 from s1; the maximum for 'b' is 3 from s2. In the following we will not consider letters when the maximum of their occurrences is less than or equal to 1.
-
-        We can resume the differences between s1 and s2 in the following string: "1:aaaa/2:bbb" where 1 in 1:aaaa stands for string s1 and aaaa because the maximum for a is 4. In the same manner 2:bbb stands for string s2 and bbb because the maximum for b is 3.
-
-        The task is to produce a string in which each lowercase letters of s1 or s2 appears as many times as its maximum if this maximum is strictly greater than 1; these letters will be prefixed by the number of the string where they appear with their maximum value and :. If the maximum is in s1 as well as in s2 the prefix is =:.
-
-        In the result, substrings (a substring is for example 2:nnnnn or 1:hhh; it contains the prefix) will be in decreasing order of their length and when they have the same length sorted in ascending lexicographic order (letters and digits - more precisely sorted by codepoint); the different groups will be separated by '/'. See examples and "Example Tests".
-
-        Hopefully other examples can make this clearer.
-
-        s1 = "my&friend&Paul has heavy hats! &"
-        s2 = "my friend John has many many friends &"
-        mix(s1, s2) --> "2:nnnnn/1:aaaa/1:hhh/2:mmm/2:yyy/2:dd/2:ff/2:ii/2:rr/=:ee/=:ss"
-
-        s1 = "mmmmm m nnnnn y&friend&Paul has heavy hats! &"
-        s2 = "my frie n d Joh n has ma n y ma n y frie n ds n&"
-        mix(s1, s2) --> "1:mmmmmm/=:nnnnnn/1:aaaa/1:hhh/2:yyy/2:dd/2:ff/2:ii/2:rr/=:ee/=:ss"
-
-        s1="Are the kids at home? aaaaa fffff"
-        s2="Yes they are here! aaaaa fffff"
-        mix(s1, s2) --> "=:aaaaaa/2:eeeee/=:fffff/1:tt/2:rr/=:hh"*/
-
 package CodeWars;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Mixing {
 
+    static char pref1 = '1';
+    static char pref2 = '2';
+    static char prefEq = '=';
+
     public static String mix(String s1, String s2) {
 
-        //edge case
-        if (s1 == s2) return "";
+        if (s1.equals(s2) || s1 == null || s2 == null) return "";
 
-        String srtS1 = getString(s1);
-        String srtS2 = getString(s2);
-        System.out.println("S1 string:"+srtS1);
-        System.out.println("S2 string:"+srtS2);
-        
-        int a = 'z';
-        System.out.println(a);
+        Map<Character, Char> map1 = new ConcurrentHashMap<>();
+        Map<Character, Char> map2 = new ConcurrentHashMap<>();
 
-        return "";
+        fillMap(s1, map1, pref1);
+        fillMap(s2, map2, pref2);
 
-        /*int[] alphabet = new char[26];
-        int[] letterContainS1 = new int[26];
-        int[] letterContainS2 = new int[26];
+        remove(map1);
+        remove(map2);
 
-        //fill alphabet with chars
-        for (int i = 0; i < 26; i++) {
-            alphabet[i] = (char) ('a'+i);
-        }
+        map1.forEach((k1, v1) -> map2.merge(k1, v1, Mixing::condition));
+        StringBuilder sb = new StringBuilder();
+        entriesSortedByValues(map2).forEach(entry -> {
 
-        //count occurrences of lowercase char
-        for (int i = 0; i < Math.max(s1.length(), s2.length()); i++) {
-            if (i < s1.length() && s1.charAt(i) >= 'a' && s1.charAt(i) <= 'z'){
-                ++letterContainS1[s1.charAt(i)-97];
-            }
-            if (i < s2.length() && s2.charAt(i) >= 'a' && s2.charAt(i) <= 'z'){
-                ++letterContainS2[s2.charAt(i)-97];
-            }
-        }
-
-        String pattern1 = "1:";
-        String pattern2 = "2:";
-        String patternEqual = "=:";
-
-        StringBuilder sb = new StringBuilder("");
-
-        for (int i = 0; i < 26; i++) {
-            if (Math.max(letterContainS1[i], letterContainS2[i]) <= 1) continue;
-            if (letterContainS1[i] > letterContainS2[i]) sb.append(pattern1);
-            if (letterContainS1[i] < letterContainS2[i]) sb.append(pattern2);
-            else sb.append(patternEqual);
-            sb.append(alphabet[i]);
-            if (i == 25) break;
-            sb.append('/');
-        }
-
-        return sb.toString();*/
+            String rep = String.format("%" + entry.getValue().freq + "s", "").replace(' ', entry.getValue().aChar);
+            sb.append(String.format("%c:%s/", entry.getValue().prefix, rep));
+        });
+        return sb.toString().substring(0, sb.length()-1);
     }
 
-    private static String getString(String str) {
-        char[] chars = str.toCharArray();
+    private static Char condition(Char oldVal, Char newVal) {
+        int oldFreq = oldVal.freq;
+        int newFreq = newVal.freq;
+        if (oldFreq > newFreq){
+            oldVal.prefix = pref2;
+            return oldVal;
+        } else if (oldFreq < newFreq){
+            oldVal.prefix = pref1;
+            return newVal;
+        } else {
+            oldVal.prefix = prefEq;
+            return  oldVal;
+        }
+    }
 
+    private static void remove(Map<Character, Char> map) {
+        map.forEach((key, value) -> {
+            if (value.freq < 2) map.remove(key);
+        });
+    }
+
+    private static void fillMap(String s, Map<Character, Char> map, char pref) {
+        char[] chars = s.toCharArray();
         for (int i = 0; i < chars.length; i++) {
-            if (chars[i] >= 'a' || chars[i] <= 'z');
+            char c = chars[i];
+            if (c >= 'a' && c <= 'z') {
+                if (!map.containsKey(c)) {
+                    Char newChar = new Char();
+                    newChar.prefix = pref;
+                    newChar.aChar = c;
+                    map.put(c, newChar);
+                }
+                Char curChar = map.get(c);
+                ++curChar.freq;
+            }
         }
-        
-        Arrays.sort(chars);
-        String sortedStr = new String(chars);
-        System.out.println(sortedStr);
-        return sortedStr;
     }
+
+    static <K,V extends Comparable<? super V>>
+    SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
+        SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<>(
+                Comparator.comparing(Map.Entry::getValue)
+        );
+        sortedEntries.addAll(map.entrySet());
+        return sortedEntries;
+    }
+
+    static class Char implements Comparable<Char>{
+        char aChar;
+        int freq;
+        char prefix;
+
+        /**
+         * Order:
+         * 1. Frequency
+         * 2. Prefix ("1" > "2" > "=")
+         * 3. Character alphabetically
+         *
+         * @param c
+         * @return
+         */
+        @Override
+        public int compareTo(Char c) {
+
+
+            return
+                    //check freq
+                    (this.freq > c.freq)?-1:
+                            (this.freq < c.freq)?1:
+                                    //check prefix
+                                    (this.prefix > c.prefix)?1:
+                                            (this.prefix < c.prefix)?-1:
+                                                    //check alphabetically
+                                                    (this.aChar > c.aChar)?1:
+                                                            (this.aChar < c.aChar)?-1:0;
+
+
+        }
+    }
+
 }
