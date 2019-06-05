@@ -1,4 +1,4 @@
-package LambdaAndStreams;
+package by.vision.training.LambdaAndStreams;
 
 import java.util.ArrayList;
 import java.util.List;

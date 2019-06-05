@@ -1,10 +1,9 @@
-package LambdaAndStreams;
+package by.vision.training.LambdaAndStreams;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.function.UnaryOperator;
 
 public class EmployeeProvider {
 

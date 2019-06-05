@@ -1,4 +1,4 @@
-package LambdaAndStreams;
+package by.vision.training.LambdaAndStreams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class LambdaTest {
 
         //premium salary
         /*int increment = 100;
-        BiConsumer<LambdaAndStreams.Employee, Integer> premium = (x, y) -> x.setSalary(x.getSalary() + y);
+        BiConsumer<by.vision.training.LambdaAndStreams.Employee, Integer> premium = (x, y) -> x.setSalary(x.getSalary() + y);
         increaseSalary(employeeList, increment, premium);
         employeeList.forEach(System.out::println);*/
 
