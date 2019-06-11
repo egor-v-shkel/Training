@@ -13,15 +13,12 @@ public class StreamTest {
     }
 
     public static void fillList(){
-        Stream.generate(() -> {
-            String[] names = EmployeeProvider.names;
-            String[] lastNames = EmployeeProvider.lastNames;
-            String[] departments = EmployeeProvider.departments;
-            return new Employee(EmployeeProvider.getRandom(names),
-                    EmployeeProvider.getRandom(lastNames),
-                    EmployeeProvider.getRandom(departments),
-                    EmployeeProvider.random.nextInt(10000));
-        })
+        EmployeeProvider employeeProvider = new EmployeeProvider();
+
+        Stream.generate(() -> new Employee(employeeProvider.getRandomName(),
+                employeeProvider.getRandomLastName(),
+                employeeProvider.getRandomDepartment(),
+                EmployeeProvider.random.nextInt(10000)))
                 .limit(100).forEach(System.out::println);
     }
 
