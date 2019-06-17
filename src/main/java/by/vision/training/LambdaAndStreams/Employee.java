@@ -5,11 +5,13 @@ import java.util.Objects;
 public class Employee {
     String firstName;
     String lastName;
-    String department;
+    Department department;
     int salary;
 
+    enum Department {IT, Sales, SuperHeroes, AnotherDepartment }
 
-    public Employee(String firstName, String lastName, String department, int salary) {
+
+    public Employee(String firstName, String lastName, Department department, int salary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.salary = salary;
@@ -64,5 +66,9 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public Department getDepartment() {
+        return department;
     }
 }
