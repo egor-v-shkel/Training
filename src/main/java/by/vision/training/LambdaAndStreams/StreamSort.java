@@ -1,11 +1,6 @@
 package by.vision.training.LambdaAndStreams;
 
-import one.util.streamex.StreamEx;
-
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -14,8 +9,7 @@ import java.util.stream.Stream;
 
 public class StreamSort {
 
-    static List<Employee> randomEmployeesList = EmployeeProvider.getRandomEmployeesList(100_000);
-
+    static List<Employee> randomEmployeesList = EmployeeProvider.getRandomEmployeesList(1_000);
 
     public static void main(String[] args) {
 
@@ -33,9 +27,13 @@ public class StreamSort {
                         .thenComparing(Employee::getFirstName));
         testAndPrint(stream1, String.format("salary > %d, Department, then by First Name", minSalary));
 
-        randomEmployeesList.stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.counting()))
-                .forEach((e, count) -> System.out.println(e+":"+count));
+        /*randomEmployeesList.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors
+                        .mapping(Employee::getFirstName, Collectors.
+                                collectingAndThen(Collectors.toCollection(ArrayList::new), x -> x.sort(Comparator.naturalOrder())))))
+                .forEach((k, v) -> {
+
+                    System.out.println(k+":"+v)});*/
 
         String[] split = "String".split("");
         Arrays.asList(split).stream()
